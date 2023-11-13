@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 import atomik
+from atomik.errors import FileAlreadyExistsError
 
 
 def test__atomik_file(file_name, data):
@@ -51,14 +52,18 @@ def test_atomik_file_bytes(file_name, data):
         assert f.read() == data
 
 
-@pytest.mark.xfail
-def test_atomik_file_overwrite(file_name, data):
+def test__atomik_file__file_present__raise(file_name, data):
     path = Path(file_name)
-    with atomik.file(path) as f:
-        assert not path.exists()
-        f.write(data)
+    path.touch()
+    with pytest.raises(FileAlreadyExistsError):
+        with atomik.file(path) as f:
+            f.write(data)
 
-    assert path.exists()
+def test__atomik_file__file_overwrite(file_name, data):
+    path = Path(file_name)
+    path.touch()
+    with atomik.file(path, overwrite=True) as f:
+        f.write(data)
     with open(path) as f:
         assert f.read() == data
 
