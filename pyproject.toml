@@ -7,10 +7,10 @@ build-backend = "hatchling.build"
 name = "atomik" 
 version = "0.0.1"
 authors = [
-  { name="halbow", email="author@example.com" },
+  { name="halbow" },
 ]
 
-description = "A small example package"
+description = "A small library to handle creation of file and folder in an atomic way !"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
@@ -20,7 +20,7 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/pypa/sampleproject"
-"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+"Homepage" = "https://github.com/halbow/atomik"
+"Bug Tracker" = "https://github.com/halbow/atomik/issues"
 
 #pytest
