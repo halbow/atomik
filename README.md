@@ -5,13 +5,13 @@ Atomik provides you a python-friendly way to manage writing new file and folders
 ### File
 This will ensure either all the data is correctly written to file or none of it
 ```
-with atomik("./result.json") as f:
+with atomik.file("./result.json") as f:
     print(stream, file=f)
 ```
 
 ### Folder
 ```
-with atomik("./result_folder") as dir:
+with atomik.folder("./result_folder") as dir:
     with open(Path(dir, "result_1.json") as f:
         print(result_1, file=f)
     with open(Path(dir, "result_2.json") as f:
