@@ -39,10 +39,8 @@ def test__atomik_folder(folder):
         assert f.read() == "data_2"
 
 
-
 def test_atomik_file_bytes(file_name, data):
     data = str.encode(data)
-    print(type(data))
     path = Path(file_name)
     with atomik.file(path, mode=atomik.Mode.BYTES) as f:
         assert not path.exists()
@@ -54,5 +52,14 @@ def test_atomik_file_bytes(file_name, data):
 
 
 @pytest.mark.xfail
-def test_atomik_file_overwrite():
-    assert False
+def test_atomik_file_overwrite(file_name, data):
+    path = Path(file_name)
+    with atomik.file(path) as f:
+        assert not path.exists()
+        f.write(data)
+
+    assert path.exists()
+    with open(path) as f:
+        assert f.read() == data
+
+

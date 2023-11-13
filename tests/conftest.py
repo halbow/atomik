@@ -18,7 +18,7 @@ def file_name():
 
 @pytest.fixture
 def data():
-    return   str(uuid.uuid4())
+    return  f"data_start_{uuid.uuid4()}_data_end"
 
 
 
