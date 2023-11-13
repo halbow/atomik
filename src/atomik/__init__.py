@@ -1,2 +1,2 @@
-from ._atomik import atomik
-__all__ = "atomik"
+from ._atomik import file, folder
+__all__ = ["file", "folder"]
