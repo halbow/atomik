@@ -9,7 +9,7 @@ def test__atomik_file(file_name, data):
     path = Path(file_name)
     with atomik.file(path) as f:
         assert not path.exists()
-        print(data, file=f, end="")
+        f.write(data)
 
     assert path.exists()
     with open(path) as f:
@@ -22,10 +22,10 @@ def test__atomik_folder(folder):
     with atomik.folder(Path(folder)) as path:
         path_1 = Path(path, file_1)
         with open(path_1, 'w') as f:
-            print("data_1", file=f, end="")
+            f.write("data_1")
         path_2 = Path(path, file_2)
         with open(path_2, 'w') as f:
-            print("data_2", file=f, end="")
+            f.write("data_2")
 
         assert not Path(folder, file_1).exists()
         assert not Path(folder, file_2).exists()
@@ -39,13 +39,19 @@ def test__atomik_folder(folder):
         assert f.read() == "data_2"
 
 
-@pytest.mark.xfail
-def test_atomik_file_text():
-    assert False
 
-@pytest.mark.xfail
-def test_atomik_file_bytes():
-    assert False
+def test_atomik_file_bytes(file_name, data):
+    data = str.encode(data)
+    print(type(data))
+    path = Path(file_name)
+    with atomik.file(path, mode=atomik.Mode.BYTES) as f:
+        assert not path.exists()
+        f.write(data)
+
+    assert path.exists()
+    with open(path, 'rb') as f:
+        assert f.read() == data
+
 
 @pytest.mark.xfail
 def test_atomik_file_overwrite():

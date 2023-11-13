@@ -14,7 +14,7 @@ def folder():
 
 @pytest.fixture
 def file_name():
-    return f"{WORKING_DIR}/test_file.txt"
+    return f"{WORKING_DIR}/test_file_{uuid.uuid4()}.txt"
 
 @pytest.fixture
 def data():
