@@ -10,7 +10,7 @@ authors = [
   { name="halbow" },
 ]
 
-description = "A small library to handle creation of file and folder in an atomic way !"
+description = "Atomik provides you a python-friendly way to manage writing new file and folders in an atomic way."
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
