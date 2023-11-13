@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 import atomik
 
 
@@ -12,7 +14,6 @@ def test__atomik_file(file_name, data):
     assert path.exists()
     with open(path) as f:
         assert f.read() == data
-
 
 
 def test__atomik_folder(folder):
@@ -36,3 +37,16 @@ def test__atomik_folder(folder):
         assert f.read() == "data_1"
     with open(Path(folder, file_2)) as f:
         assert f.read() == "data_2"
+
+
+@pytest.mark.xfail
+def test_atomik_file_text():
+    assert False
+
+@pytest.mark.xfail
+def test_atomik_file_bytes():
+    assert False
+
+@pytest.mark.xfail
+def test_atomik_file_overwrite():
+    assert False
