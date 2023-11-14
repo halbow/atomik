@@ -6,7 +6,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Iterator
 
-from atomik.rename import rename
+from .rename import rename
 
 
 class Mode(str, Enum):
@@ -30,5 +30,3 @@ def folder(file_name: str | Path) -> Path:
     name = tempfile.mkdtemp()
     yield Path(name)
     os.rename(name, file_name)
-
-

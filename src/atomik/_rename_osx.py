@@ -1,5 +1,5 @@
 import ctypes
-from atomik.errors import AtomikError, FileAlreadyExistsError
+from .errors import AtomikError, FileAlreadyExistsError
 from os import strerror, fsencode
 
 libc = ctypes.CDLL("libc.dylib", use_errno=True)

@@ -7,20 +7,19 @@ import pytest
 WORKING_DIR = "./tests/TEST_DATA"
 
 
-
 @pytest.fixture
 def folder():
     return f"{WORKING_DIR}/{uuid.uuid4()}"
+
 
 @pytest.fixture
 def file_name():
     return f"{WORKING_DIR}/test_file_{uuid.uuid4()}.txt"
 
+
 @pytest.fixture
 def data():
-    return  f"data_start_{uuid.uuid4()}_data_end"
-
-
+    return f"data_start_{uuid.uuid4()}_data_end"
 
 
 @pytest.fixture(autouse=True, scope="session")

@@ -1,6 +1,6 @@
 import ctypes
 import errno
-from atomik.errors import AtomikError, FileAlreadyExistsError
+from .errors import AtomikError, FileAlreadyExistsError
 from os import strerror, fsencode
 
 libc = ctypes.CDLL(None, use_errno=True)

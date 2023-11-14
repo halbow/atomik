@@ -3,9 +3,9 @@ import platform
 cur_os = platform.system()
 
 if cur_os == "Linux":
-    from atomik._rename_linux import _rename
+    from ._rename_linux import _rename
 elif cur_os == "Darwin":
-    from atomik._rename_osx import _rename
+    from ._rename_osx import _rename
 else:
     raise ValueError("Unsupported Platform ")
 
