@@ -7,7 +7,7 @@ if cur_os == "Linux":
 elif cur_os == "Darwin":
     from ._rename_osx import _rename
 else:
-    raise ValueError("Unsupported Platform ")
+    raise ValueError(f"Unsupported Platform {cur_os}")
 
 
 def rename(src_path: str, dst_path: str, overwrite=False):

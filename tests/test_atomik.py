@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import pytest
@@ -67,3 +68,14 @@ def test__atomik_file__file_overwrite(file_name, data):
         f.write(data)
     with open(path) as f:
         assert f.read() == data
+
+
+def test__atomik__folder_present__raise(folder, data):
+    Path(folder).mkdir()
+
+    with pytest.raises(FileAlreadyExistsError):
+        with atomik.folder(folder, tmp_dir="./tests/TEST_DATA/.tmp") as path:
+            with open(Path(path, "test.txt"), 'w') as f:
+                f.write(data)
+
+    assert os.listdir(folder) == []

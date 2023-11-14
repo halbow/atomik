@@ -7,7 +7,7 @@ libc = ctypes.CDLL("libc.dylib", use_errno=True)
 
 RENAME = 0
 RENAME_EXCHANGE = 1 << 1
-RENAME_NOREPLACE = 1 << 2  # Not sure of the values ?
+RENAME_NOREPLACE = 1 << 2  # Not sure of the values but it works ?
 
 FILE_EXIST = 17
 
