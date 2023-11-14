@@ -4,3 +4,6 @@ class AtomikError(Exception):
 
 class FileAlreadyExistsError(AtomikError):
     pass
+
+class InvalidCrossDeviceError(AtomikError):
+    pass

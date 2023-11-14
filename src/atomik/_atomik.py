@@ -15,18 +15,25 @@ class Mode(str, Enum):
 
 
 @contextlib.contextmanager
-def file(file_name: str | Path, mode=Mode.TEXT, overwrite=False) -> Iterator[typing.IO]:
-    file_name = file_name if isinstance(file_name, Path) else Path(file_name)
-    fd, name = tempfile.mkstemp()
+def file(
+    file_name: str | Path, mode=Mode.TEXT, overwrite=False, tmp_dir=None
+) -> Iterator[typing.IO]:
+    # raise if tmp_dir doesn't exist ?
+    fd, name = tempfile.mkstemp(dir=tmp_dir, suffix=".atomik")  # text mode here ?
+
+    src = str(Path(name).absolute())
+    dst = str(Path(file_name).absolute())
+
     f = os.fdopen(fd, "wt" if mode == Mode.TEXT else "wb")
     yield f
     f.close()
-    rename(name, str(file_name), overwrite=overwrite)
+
+    rename(src, dst, overwrite=overwrite)
 
 
 @contextlib.contextmanager
-def folder(file_name: str | Path) -> Path:
+def folder(file_name: str | Path, tmp_dir=None) -> Path:
     file_name = file_name if isinstance(file_name, Path) else Path(file_name)
-    name = tempfile.mkdtemp()
+    name = tempfile.mkdtemp(dir=tmp_dir)
     yield Path(name)
     os.rename(name, file_name)
