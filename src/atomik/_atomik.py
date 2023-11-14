@@ -48,10 +48,11 @@ def folder(
 
     src = str(Path(name).absolute())
     dst = str(Path(file_name).absolute())
+
     yield Path(name)
 
     if overwrite:
         rename(src, dst, Flag.RENAME_EXCHANGE)
         shutil.rmtree(src)
     else:
-        rename(src, dst, Flag.RENAME_NOREPLACE)
+        rename(src, dst)
