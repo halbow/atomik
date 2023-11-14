@@ -24,4 +24,4 @@ By default, atomik will not overwrite files/non-empty folders but it's configura
 
 # How ?
 
-It uses Linux rename atomic property to handle this
+It uses rename atomic property to handle this

@@ -106,3 +106,5 @@ def test__atomik__folder_present__overwrite(folder, data):
     assert Path(folder).exists()
     with open(Path(folder, file_1)) as f:
         assert f.read() == "another_data"
+
+    assert not Path(path).exists()

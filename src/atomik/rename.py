@@ -1,5 +1,7 @@
 import platform
 
+from .flags import Flag
+
 cur_os = platform.system()
 
 if cur_os == "Linux":
@@ -10,5 +12,5 @@ else:
     raise ValueError(f"Unsupported Platform {cur_os}")
 
 
-def rename(src_path: str, dst_path: str, overwrite=False):
-    _rename(src_path, dst_path, overwrite)
+def rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE):
+    _rename(src_path, dst_path, flag)

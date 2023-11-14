@@ -2,24 +2,30 @@ import ctypes
 from .errors import AtomikError, FileAlreadyExistsError
 from os import strerror, fsencode
 
+from .flags import Flag
+
 libc = ctypes.CDLL("libc.dylib", use_errno=True)
 
-
-RENAME = 0
-RENAME_EXCHANGE = 1 << 1
-RENAME_NOREPLACE = 1 << 2  # Not sure of the values but it works ?
+_osx_flag = {
+    # Equivalent to rename # https://man7.org/linux/man-pages/man2/rename.2.html
+    Flag.RENAME: 0,
+    Flag.RENAME_NOREPLACE: 1 << 2,  # Not sure of the values but it works ?
+    Flag.RENAME_EXCHANGE: 2,
+}
 
 FILE_EXIST = 17
+_AT_FDCWD = -2
 
 
-def _rename(src_path: str, dst_path: str, overwrite=False):
-    relative_dir = -2
+def _rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE):
+    osx_flag = _osx_flag.get(flag)
+
     code = libc.renameatx_np(
-        relative_dir,
+        _AT_FDCWD,
         fsencode(src_path),
-        relative_dir,
+        _AT_FDCWD,
         fsencode(dst_path),
-        RENAME if overwrite else RENAME_NOREPLACE,
+        osx_flag,
     )
     if code == 0:
         return

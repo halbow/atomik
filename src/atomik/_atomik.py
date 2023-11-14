@@ -1,11 +1,13 @@
 import contextlib
 import os
+import shutil
 import tempfile
 import typing
 from enum import Enum
 from pathlib import Path
 from typing import Iterator
 
+from .flags import Flag
 from .rename import rename
 
 
@@ -16,7 +18,10 @@ class Mode(str, Enum):
 
 @contextlib.contextmanager
 def file(
-    file_name: str | Path, mode=Mode.TEXT, overwrite=False, tmp_dir=None
+    file_name: str | Path,
+    mode: Mode = Mode.TEXT,
+    overwrite: bool = False,
+    tmp_dir: str | Path = None,
 ) -> Iterator[typing.IO]:
     # raise if tmp_dir doesn't exist ?
     fd, name = tempfile.mkstemp(dir=tmp_dir, suffix=".atomik")  # text mode here ?
@@ -28,14 +33,24 @@ def file(
     yield f
     f.close()
 
-    rename(src, dst, overwrite=overwrite)
+    flag = Flag.RENAME if overwrite else Flag.RENAME_NOREPLACE
+    rename(src, dst, flag)
 
 
 @contextlib.contextmanager
-def folder(file_name: str | Path, tmp_dir=None, overwrite=False) -> Path:
+def folder(
+    file_name: str | Path,
+    overwrite: bool = False,
+    tmp_dir: str | Path = None,
+) -> Path:
     name = tempfile.mkdtemp(dir=tmp_dir, suffix=".atomik")
 
     src = str(Path(name).absolute())
     dst = str(Path(file_name).absolute())
     yield Path(name)
-    rename(src, dst, overwrite=overwrite)
+
+    if overwrite:
+        rename(src, dst, Flag.RENAME_EXCHANGE)
+        shutil.rmtree(src)
+    else:
+        rename(src, dst, Flag.RENAME_NOREPLACE)
