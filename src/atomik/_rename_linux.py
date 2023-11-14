@@ -8,9 +8,8 @@ from os import strerror, fsencode
 libc = ctypes.CDLL("libc.so.6", use_errno=True)
 
 
-RENAME = 0
-RENAME_EXCHANGE = 2
-RENAME_NOREPLACE = 1
+RENAME = 0  # Equivalent to rename # https://man7.org/linux/man-pages/man2/rename.2.html
+RENAME_NOREPLACE = 1  # Value found here https://github.com/torvalds/linux/blob/9bacdd8996c77c42ca004440be610692275ff9d0/include/uapi/linux/fs.h#L50
 
 FILE_EXIST = 17
 INVALID_CROSS_DEVICE = 18
