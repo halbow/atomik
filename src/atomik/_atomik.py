@@ -23,6 +23,7 @@ def file(
     overwrite: bool = False,
     tmp_dir: str | Path = None,
 ) -> Iterator[typing.IO]:
+    # raise if filename ends with / ?
     # raise if tmp_dir doesn't exist ?
     fd, name = tempfile.mkstemp(dir=tmp_dir, suffix=".atomik")  # text mode here ?
 
