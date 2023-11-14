@@ -27,4 +27,4 @@ def _rename(src_path: str, dst_path: str, overwrite=False):
         errno = ctypes.get_errno()
         if errno == FILE_EXIST and strerror(errno) == "File exists":
             raise FileAlreadyExistsError
-        raise AtomikError(f"Error during rename: {code}")
+        raise AtomikError(f"Error during rename: {strerror(errno)}({errno})")

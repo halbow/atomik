@@ -64,7 +64,7 @@ def test__atomik_file__file_present__raise(file_name, data):
 def test__atomik_file__file_overwrite(file_name, data):
     path = Path(file_name)
     path.touch()
-    with atomik.file(path, overwrite=True, tmp_dir="./tests/TEST_DATA/.tmp") as f:
+    with atomik.file(path, tmp_dir="./tests/TEST_DATA/.tmp", overwrite=True) as f:
         f.write(data)
     with open(path) as f:
         assert f.read() == data
@@ -81,7 +81,7 @@ def test__atomik__folder_present__raise(folder, data):
     assert os.listdir(folder) == []
 
 
-def test__atomik__folder_present__overwrite(folder, data):
+def test__atomik__empty_folder_present__overwrite(folder, data):
     Path(folder).mkdir()
     file_1 = "test.txt"
     with atomik.folder(folder, tmp_dir="./tests/TEST_DATA/.tmp", overwrite=True) as path:
@@ -91,3 +91,18 @@ def test__atomik__folder_present__overwrite(folder, data):
     assert Path(folder).exists()
     with open(Path(folder, file_1)) as f:
         assert f.read() == data
+
+def test__atomik__folder_present__overwrite(folder, data):
+    Path(folder).mkdir()
+    file_1 = "test.txt"
+
+    with open(Path(folder, file_1), 'w') as f:
+        f.write(data)
+
+    with atomik.folder(folder, tmp_dir="./tests/TEST_DATA/.tmp", overwrite=True) as path:
+        with open(Path(path, file_1), 'w') as f:
+            f.write("another_data")
+
+    assert Path(folder).exists()
+    with open(Path(folder, file_1)) as f:
+        assert f.read() == "another_data"

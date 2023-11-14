@@ -33,7 +33,9 @@ def file(
 
 @contextlib.contextmanager
 def folder(file_name: str | Path, tmp_dir=None, overwrite=False) -> Path:
-    file_name = file_name if isinstance(file_name, Path) else Path(file_name)
     name = tempfile.mkdtemp(dir=tmp_dir, suffix=".atomik")
+
+    src = str(Path(name).absolute())
+    dst = str(Path(file_name).absolute())
     yield Path(name)
-    rename(name, file_name, overwrite=overwrite)
+    rename(src, dst, overwrite=overwrite)
