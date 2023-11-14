@@ -36,3 +36,5 @@ The syscall doesn't allow to overwrite a non-empty folder when renaming.
 This is achieved using the `exchange` flag to swap the two folder and then the source
 folder is cleaned. This may leave the `src` folder in case of interruption/issue when deleting
 but the destination folder will still be written in an atomic way.
+
+##
