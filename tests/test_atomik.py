@@ -79,3 +79,15 @@ def test__atomik__folder_present__raise(folder, data):
                 f.write(data)
 
     assert os.listdir(folder) == []
+
+
+def test__atomik__folder_present__overwrite(folder, data):
+    Path(folder).mkdir()
+    file_1 = "test.txt"
+    with atomik.folder(folder, tmp_dir="./tests/TEST_DATA/.tmp", overwrite=True) as path:
+        with open(Path(path, file_1), 'w') as f:
+            f.write(data)
+
+    assert Path(folder).exists()
+    with open(Path(folder, file_1)) as f:
+        assert f.read() == data
