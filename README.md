@@ -40,3 +40,11 @@ The syscall doesn't allow to overwrite a non-empty folder when renaming.
 This is achieved using the `exchange` flag to swap the two folder and then the source
 folder is cleaned. This may leave the `src` folder in case of interruption/issue when deleting
 but the destination folder will still be written in an atomic way.
+
+## Acknowledgement
+
+This library's main goal is to provide a simple interface to rename file in a safe and simple way,
+without having to dive deep into OS specific documentation and limitations behind it. If you want
+to use the syscall directly I recommend these two libraries which helped the development of Atomik a lot:
+- https://github.com/nickovs/atomicswap
+- https://github.com/jordemort/python-renameat2
