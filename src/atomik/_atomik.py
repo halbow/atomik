@@ -17,7 +17,7 @@ class Mode(str, Enum):
 
 @contextlib.contextmanager
 def file(
-    file_name: str | Path,
+    file_name: Union[str, Path],
     mode: Mode = Mode.TEXT,
     overwrite: bool = False,
     tmp_dir: Optional[Union[str, Path]] = None,
@@ -39,7 +39,7 @@ def file(
 
 @contextlib.contextmanager
 def folder(
-    file_name: str | Path,
+    file_name: Union[str, Path],
     overwrite: bool = False,
     tmp_dir: Optional[Union[str, Path]] = None,
 ) -> Generator[Path, None, None]:
