@@ -22,3 +22,10 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/halbow/atomik"
 "Bug Tracker" = "https://github.com/halbow/atomik/issues"
+
+[project.optional-dependencies]
+dev  = [
+    "pytest",
+    "mypy",
+    "flake8",
+]

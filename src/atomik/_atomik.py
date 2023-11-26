@@ -5,7 +5,7 @@ import tempfile
 import typing
 from enum import Enum
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, Generator
 
 from .flags import Flag
 from .rename import rename
@@ -21,8 +21,8 @@ def file(
     file_name: str | Path,
     mode: Mode = Mode.TEXT,
     overwrite: bool = False,
-    tmp_dir: str | Path = None,
-) -> Iterator[typing.IO]:
+    tmp_dir: str | Path | None = None,
+) -> Generator[typing.IO, None, None]:
     # raise if filename ends with / ?
     # raise if tmp_dir doesn't exist ?
     fd, name = tempfile.mkstemp(dir=tmp_dir, suffix=".atomik")  # text mode here ?
@@ -42,8 +42,8 @@ def file(
 def folder(
     file_name: str | Path,
     overwrite: bool = False,
-    tmp_dir: str | Path = None,
-) -> Path:
+    tmp_dir: str | Path | None = None,
+) -> Generator[Path, None, None]:
     name = tempfile.mkdtemp(dir=tmp_dir, suffix=".atomik")
 
     src = str(Path(name).absolute())

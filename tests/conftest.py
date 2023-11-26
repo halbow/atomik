@@ -9,6 +9,7 @@ WORKING_DIR = "./tests/TEST_DATA"
 
 
 @pytest.fixture
+def folder():
     return f"{WORKING_DIR}/{uuid.uuid4()}"
 
 

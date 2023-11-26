@@ -28,14 +28,11 @@ with atomik.folder("./result_folder") as dir:
 
 ## 🔐 Safe default
 
-By default, atomik will not overwrite files/non-empty folders, but it's configurable. 
+By default, atomik will not overwrite files/folders (but it's configurable) 
 
-## 🕵️‍♀️ How ?
+## 🤓 How ?
 
-Atomik uses the new `renameat2` syscall to allow to rename file in an atomic way. While 
-
-## Limitation
-
+Atomik uses the new `renameat2` syscall to allow to rename file in an atomic way.
 The syscall doesn't allow to overwrite a non-empty folder when renaming. 
 This is achieved using the `exchange` flag to swap the two folder and then the source
 folder is cleaned. This may leave the `src` folder in case of interruption/issue when deleting
