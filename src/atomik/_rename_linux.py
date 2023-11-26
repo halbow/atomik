@@ -26,7 +26,7 @@ _INVALID_CROSS_DEVICE = 18
 _AT_FDCWD = -100
 
 
-def _rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE):
+def _rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE) -> None:
     linux_flag = _linux_flag.get(flag)
 
     code = libc.renameat2(

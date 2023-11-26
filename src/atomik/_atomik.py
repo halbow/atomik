@@ -4,7 +4,7 @@ import shutil
 import tempfile
 from enum import Enum
 from pathlib import Path
-from typing import Optional, Generator, IO, Union
+from typing import Optional, Generator, IO, Union, Any
 
 from .flags import Flag
 from .rename import rename
@@ -21,14 +21,13 @@ def file(
     mode: Mode = Mode.TEXT,
     overwrite: bool = False,
     tmp_dir: Optional[Union[str, Path]] = None,
-) -> Generator[IO, None, None]:
+) -> Generator[IO[Any], None, None]:
     # raise if filename ends with / ?
     # raise if tmp_dir doesn't exist ?
     fd, name = tempfile.mkstemp(dir=tmp_dir, suffix=".atomik")  # text mode here ?
 
     src = str(Path(name).absolute())
     dst = str(Path(file_name).absolute())
-
     f = os.fdopen(fd, "wt" if mode == Mode.TEXT else "wb")
     yield f
     f.close()

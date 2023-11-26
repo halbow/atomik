@@ -18,7 +18,7 @@ FILE_EXIST = 17
 _AT_FDCWD = -2
 
 
-def _rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE):
+def _rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE) -> None:
     osx_flag = _osx_flag.get(flag)
 
     code = libc.renameatx_np(

@@ -9,7 +9,7 @@ from atomik.errors import FileAlreadyExistsError
 TPM_DIR = "./tests/TEST_DATA/.tmp"
 
 
-def test__atomik_file_1(file_name, data):
+def test__atomik_file_1(file_name: str, data: str) -> None:
     path = Path(file_name)
     with atomik.file(path, tmp_dir=TPM_DIR) as f:
         assert not path.exists()
@@ -20,7 +20,7 @@ def test__atomik_file_1(file_name, data):
         assert f.read() == data
 
 
-def test__atomik_folder(folder):
+def test__atomik_folder(folder: str) -> None:
     file_1 = "data_1.csv"
     file_2 = "data_2.csv"
     with atomik.folder(Path(folder), tmp_dir=TPM_DIR) as path:
@@ -45,19 +45,19 @@ def test__atomik_folder(folder):
     assert not Path(path).exists()
 
 
-def test_atomik_file_bytes(file_name, data):
-    data = str.encode(data)
+def test_atomik_file_bytes(file_name: str, data: str) -> None:
+    b_data = data.encode()
     path = Path(file_name)
     with atomik.file(path, mode=atomik.Mode.BYTES, tmp_dir=TPM_DIR) as f:
         assert not path.exists()
-        f.write(data)
+        f.write(b_data)
 
     assert path.exists()
     with open(path, "rb") as f:
-        assert f.read() == data
+        assert f.read() == b_data
 
 
-def test__atomik_file__file_present__raise(file_name, data):
+def test__atomik_file__file_present__raise(file_name: str, data: str) -> None:
     path = Path(file_name)
     path.touch()
     with pytest.raises(FileAlreadyExistsError):
@@ -65,7 +65,7 @@ def test__atomik_file__file_present__raise(file_name, data):
             f.write(data)
 
 
-def test__atomik_file__file_overwrite(file_name, data):
+def test__atomik_file__file_overwrite(file_name: str, data: str) -> None:
     path = Path(file_name)
     path.touch()
     with atomik.file(path, tmp_dir=TPM_DIR, overwrite=True) as f:
@@ -74,7 +74,7 @@ def test__atomik_file__file_overwrite(file_name, data):
         assert f.read() == data
 
 
-def test__atomik__folder_present__raise(folder, data):
+def test__atomik__folder_present__raise(folder: str, data: str) -> None:
     Path(folder).mkdir()
 
     with pytest.raises(FileAlreadyExistsError):
@@ -85,7 +85,7 @@ def test__atomik__folder_present__raise(folder, data):
     assert os.listdir(folder) == []
 
 
-def test__atomik__empty_folder_present__overwrite(folder, data):
+def test__atomik__empty_folder_present__overwrite(folder: str, data: str) -> None:
     Path(folder).mkdir()
     file_1 = "test.txt"
     with atomik.folder(folder, tmp_dir=TPM_DIR, overwrite=True) as path:
@@ -99,7 +99,7 @@ def test__atomik__empty_folder_present__overwrite(folder, data):
     assert not Path(path).exists()
 
 
-def test__atomik__folder_present__overwrite(folder, data):
+def test__atomik__folder_present__overwrite(folder: str, data: str) -> None:
     Path(folder).mkdir()
     file_1 = "test.txt"
 

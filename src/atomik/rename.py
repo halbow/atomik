@@ -12,5 +12,5 @@ else:
     raise ValueError(f"Unsupported Platform {cur_os}")
 
 
-def rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE):
+def rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE) -> None:
     _rename(src_path, dst_path, flag)
