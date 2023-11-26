@@ -9,7 +9,7 @@ libc = ctypes.CDLL("libc.dylib", use_errno=True)
 _osx_flag = {
     # Equivalent to rename # https://man7.org/linux/man-pages/man2/rename.2.html
     Flag.RENAME: 0,
-    Flag.RENAME_NOREPLACE:  4,
+    Flag.RENAME_NOREPLACE: 4,
     Flag.RENAME_EXCHANGE: 2,
     # Not sure of the value, taken from here https://opensource.apple.com/source/xnu/xnu-6153.41.3/bsd/sys/stdio.h
 }

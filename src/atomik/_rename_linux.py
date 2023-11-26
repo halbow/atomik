@@ -13,7 +13,8 @@ libc = ctypes.CDLL("libc.so.6", use_errno=True)
 _linux_flag = {
     # Equivalent to rename # https://man7.org/linux/man-pages/man2/rename.2.html
     Flag.RENAME: 0,
-    # Value copied from https://github.com/torvalds/linux/blob/9bacdd8996c77c42ca004440be610692275ff9d0/include/uapi/linux/fs.h#L50
+    # Value copied from
+    # https://github.com/torvalds/linux/blob/9bacdd8996c77c42ca004440be610692275ff9d0/include/uapi/linux/fs.h#L50
     Flag.RENAME_NOREPLACE: 1,
     Flag.RENAME_EXCHANGE: 2,
 }

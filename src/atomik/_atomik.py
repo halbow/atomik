@@ -4,7 +4,7 @@ import shutil
 import tempfile
 from enum import Enum
 from pathlib import Path
-from typing import Optional, Generator, IO
+from typing import Optional, Generator, IO, Union
 
 from .flags import Flag
 from .rename import rename
@@ -20,7 +20,7 @@ def file(
     file_name: str | Path,
     mode: Mode = Mode.TEXT,
     overwrite: bool = False,
-    tmp_dir: Optional[str | Path] = None,
+    tmp_dir: Optional[Union[str, Path]] = None,
 ) -> Generator[IO, None, None]:
     # raise if filename ends with / ?
     # raise if tmp_dir doesn't exist ?
@@ -41,7 +41,7 @@ def file(
 def folder(
     file_name: str | Path,
     overwrite: bool = False,
-    tmp_dir: Optional[str | Path] = None,
+    tmp_dir: Optional[Union[str, Path]] = None,
 ) -> Generator[Path, None, None]:
     name = tempfile.mkdtemp(dir=tmp_dir, suffix=".atomik")
 

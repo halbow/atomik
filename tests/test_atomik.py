@@ -8,6 +8,7 @@ from atomik.errors import FileAlreadyExistsError
 
 TPM_DIR = "./tests/TEST_DATA/.tmp"
 
+
 def test__atomik_file_1(file_name, data):
     path = Path(file_name)
     with atomik.file(path, tmp_dir=TPM_DIR) as f:
@@ -43,12 +44,11 @@ def test__atomik_folder(folder):
 
     assert not Path(path).exists()
 
+
 def test_atomik_file_bytes(file_name, data):
     data = str.encode(data)
     path = Path(file_name)
-    with atomik.file(
-        path, mode=atomik.Mode.BYTES, tmp_dir=TPM_DIR
-    ) as f:
+    with atomik.file(path, mode=atomik.Mode.BYTES, tmp_dir=TPM_DIR) as f:
         assert not path.exists()
         f.write(data)
 
@@ -88,9 +88,7 @@ def test__atomik__folder_present__raise(folder, data):
 def test__atomik__empty_folder_present__overwrite(folder, data):
     Path(folder).mkdir()
     file_1 = "test.txt"
-    with atomik.folder(
-        folder, tmp_dir=TPM_DIR, overwrite=True
-    ) as path:
+    with atomik.folder(folder, tmp_dir=TPM_DIR, overwrite=True) as path:
         with open(Path(path, file_1), "w") as f:
             f.write(data)
 
@@ -108,9 +106,7 @@ def test__atomik__folder_present__overwrite(folder, data):
     with open(Path(folder, file_1), "w") as f:
         f.write(data)
 
-    with atomik.folder(
-        folder, tmp_dir=TPM_DIR, overwrite=True
-    ) as path:
+    with atomik.folder(folder, tmp_dir=TPM_DIR, overwrite=True) as path:
         with open(Path(path, file_1), "w") as f:
             f.write("another_data")
 
