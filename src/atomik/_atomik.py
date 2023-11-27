@@ -24,7 +24,7 @@ def file(
 ) -> Generator[IO[Any], None, None]:
     # raise if filename ends with / ?
     # raise if tmp_dir doesn't exist ?
-    fd, name = tempfile.mkstemp(dir=tmp_dir, suffix=".atomik")  # text mode here ?
+    fd, name = tempfile.mkstemp(dir=tmp_dir, suffix=".atomik")
 
     src = str(Path(name).absolute())
     dst = str(Path(file_name).absolute())
