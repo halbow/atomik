@@ -41,7 +41,7 @@ def _rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE) ->
     else:
         errno = ctypes.get_errno()
         if errno == _FILE_EXIST:
-            raise FileAlreadyExistsError(strerror(errno))
+            raise FileAlreadyExistsError(f"File {dst_path} already exists")
         if errno == _INVALID_CROSS_DEVICE:
             src_dev = os.stat(src_path).st_dev
             dst_dev = os.stat(Path(dst_path).parent).st_dev

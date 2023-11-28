@@ -33,5 +33,5 @@ def _rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE) ->
     else:
         errno = ctypes.get_errno()
         if errno == FILE_EXIST and strerror(errno) == "File exists":
-            raise FileAlreadyExistsError
+            raise FileAlreadyExistsError(f"File {dst_path} already exists")
         raise AtomikError(f"Error during rename: {strerror(errno)}({errno})")
