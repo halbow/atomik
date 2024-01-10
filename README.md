@@ -38,6 +38,10 @@ This is achieved using the `exchange` flag to swap the two folder and then the s
 folder is cleaned. This may leave the `src` folder in case of interruption/issue when deleting
 but the destination folder will still be written in an atomic way.
 
+## Limitations
+
+The rename syscall only work if the source and destination are on the same filesystem.
+
 ## Acknowledgement
 
 This library's main goal is to provide a simple interface to rename file in a safe and simple way,
