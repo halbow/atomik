@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "atomik" 
-version = "0.0.1rc"
+version = "0.0.2rc"
 authors = [
   { name="halbow" },
 ]
