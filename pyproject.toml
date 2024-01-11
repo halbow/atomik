@@ -1,11 +1,10 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 
 [project]
 name = "atomik" 
-version = "0.0.2rc"
 authors = [
   { name="halbow" },
 ]
@@ -18,6 +17,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dynamic = ["version"]
 
 [project.urls]
 "Homepage" = "https://github.com/halbow/atomik"
@@ -30,3 +30,7 @@ dev  = [
     "flake8",
     "black",
 ]
+
+[tool.hatch.version]
+source = "vcs"
+
