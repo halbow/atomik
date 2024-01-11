@@ -41,4 +41,7 @@ jobs:
     - name: black
       run: |
         black .
+    - name: tests
+      run: |
+        pytest tests/
 
