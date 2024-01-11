@@ -40,7 +40,7 @@ but the destination folder will still be written in an atomic way.
 
 ## Limitations
 
-The rename syscall only work if the source and destination are on the same filesystem.
+The rename syscall only work if the source and destination are on the same filesystem
 
 ## Acknowledgement
 
