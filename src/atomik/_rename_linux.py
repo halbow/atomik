@@ -45,7 +45,5 @@ def _rename(src_path: str, dst_path: str, flag: Flag = Flag.RENAME_NOREPLACE) ->
         if errno == _INVALID_CROSS_DEVICE:
             src_dev = os.stat(src_path).st_dev
             dst_dev = os.stat(Path(dst_path).parent).st_dev
-            raise InvalidCrossDeviceError(
-                f"{strerror(errno)} '{src_path}' -> '{dst_path}' ({src_dev} != {dst_dev})"
-            )
+            raise InvalidCrossDeviceError(f"{strerror(errno)} '{src_path}' -> '{dst_path}' ({src_dev} != {dst_dev})")
         raise AtomikError(f"Error during rename: {strerror(errno)}({errno})")
